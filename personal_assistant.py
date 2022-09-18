@@ -16,7 +16,8 @@ import requests
 from urllib.request import urlopen
 import time
 
-wolframalpha_app_id='EVU44W-55R4L6P66Q'
+WOLFRAM_APP_ID = 'your wolframalpha app ID'
+NEWS_API = 'your news api key'
 
 Time=datetime.datetime.now().strftime("%I:%M:%S")
 
@@ -45,7 +46,7 @@ def date_():
     print(("%I:%M:%S"))
     
 def wishme():
-    speak('welcome Mr. David!')
+    speak('welcome sir!')
     time_()
     date_()
     
@@ -78,7 +79,6 @@ def TakeCommand():
     try:
       print('Recognizing....')
       query=r.recognize_google(audio,language='en-US')
-      #query=r.recognize_sphinx(audio,language='en-US')
       print(query)
 
     except Exception as e:
@@ -126,31 +126,13 @@ def wolfram():
     except StopIteration:
         print('sorry no results!')
         
-if __name__=="__main__":
-    clear=lambda :os.system('cls')
-    clear()
-    #wishme()
-    #cpu()
-    
-    #search_terms='liar'
-    #wb.open('https://www.youtube.com/results?search_query='+search_terms)
-    #wishme()
-    #img=pyautogui.screenshot()
-    #img.save('C:/Users/user/Pictures/Screenshots/screenshot.png')
-    #ms_word=r'C:\Program Files (x86)\Microsoft Office\Office14\EXCEL.EXE'            
-    #os.startfile(ms_word)
-            
-    #quit()
-    #search_term='liar'
-    #chromepath= 'C:/Program Files (x86)/Google/Chrome/Application/chrome.exe %s'
-   # wb.get(chromepath).open('https://www.google.com/search?q='+search_term)
+if __name__ == "__main__":
+    clear_console=lambda :os.system('cls')
+    clear_console()
     
     while True:
         query=TakeCommand().lower()
         print(query)
-        
-        #if 'none' in query:
-           # pass
         
         if 'time' in query:
             time_()
@@ -288,7 +270,7 @@ if __name__=="__main__":
            
         elif 'news' in query:
             try:
-               jsonObj=urlopen('https://newsapi.org/v2/top-headlines?country=us&category=entertainment&apiKey=f771ffad33754fb3b5edf565c3662392')
+               jsonObj=urlopen(NEWS_API)
                data =json.load(jsonObj)
                i=1
             
@@ -320,7 +302,7 @@ if __name__=="__main__":
             
             
         elif 'calculate' in query:
-            client=wolframalpha.Client(wolframalpha_app_id)
+            client=wolframalpha.Client(WOLFRAM_APP_ID)
             indx=query.lower().split().index('calculate')
             query=query.split()[indx+1:]
             res=client.query(''.join(query))
@@ -351,6 +333,5 @@ if __name__=="__main__":
             
         
 
-#wishme()
     
     
