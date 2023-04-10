@@ -54,18 +54,18 @@ def wishme():
     #Greetings
     hour=datetime.datetime.now().hour
     if hour>=6 and hour<=12:
-        speak('Good morning boss!')
+        speak('Good morning sir!')
         
     elif hour>=12and hour<=18:
-        speak('Good afternoon boss!')
+        speak('Good afternoon sir!')
         
     elif hour>=18 and hour<24:
-        speak('Good evening boss!')
+        speak('Good evening sir!')
         
     else :
-        speak('Good night boss!')
+        speak('Good night sir!')
     
-    speak('Ridwan at your service,please tell me how can I help you today sir?')
+    speak('Julia at your service, please tell me how can I help you today sir?')
 
 
 def TakeCommand():
@@ -109,8 +109,8 @@ def joke():
     
 def screenshot():
     img=pyautogui.screenshot()
-    img.save('C:/Users/user/Pictures/Screenshots/screenshot.png')
-    speak('screenshot taken sir!')
+    img.save(f'screenshot_{datetime.datetime.now()}.png')
+    speak('Screenshot taken sir!')
 
 
 def wolfram():
@@ -228,7 +228,7 @@ if __name__ == "__main__":
             screenshot()
             
         elif 'play'  in query:
-            audio_dir='C:/Users/user/Desktop/Quran'
+            audio_dir='C:/Users/user/Desktop/Audio'
             dir_s=os.listdir(audio_dir)
             print(dir_s)
             speak('what no should I play?')
@@ -239,10 +239,14 @@ if __name__ == "__main__":
             if 'number' in ans:
                 no=int(ans.replace('number',''))
             elif 'random' or 'you choose' in ans:
-                no=random.randint(1,114)
+                no=random.randint(1,100)
             
             
-            os.startfile(os.path.join(audio_dir,dir_s[no]))
+           try:
+             os.startfile(os.path.join(audio_dir,dir_s[no]))
+           except Exception as e:
+             print(str(e))
+             
             
             
         elif  'remember that' in query:
